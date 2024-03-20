@@ -1,0 +1,9 @@
+100
+100
+100
+Sword 5
+Shield 5
+Potion 5
+
+
+3
