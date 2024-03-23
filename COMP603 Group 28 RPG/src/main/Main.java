@@ -17,14 +17,13 @@ public class Main { // menu screen
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Welcome! Start a new game or load saved game?");
+        welcome();
 
         boolean isValid = true;
         while (isValid) {
-            System.out.println("1. New Game");
-            System.out.println("2. Saved Game");
-            
+            mainMenu();
             try {
+                System.out.print("> ");
                 int choice = scan.nextInt();
 
                 if (choice == 1) {
@@ -43,6 +42,11 @@ public class Main { // menu screen
                         game.start(game.getPlayer(), game.getRoom());
                     }
                 }
+                else if (choice == 3) {
+                    System.out.println("Thanks for playing!");
+                    System.out.println("Quitting... ");
+                    System.exit(0);
+                }
                 else {
                     throw new InputMismatchException();
                 }
@@ -50,12 +54,26 @@ public class Main { // menu screen
                 isValid = false;
             } 
             catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid option (1 or 2).");
+                System.out.println("Invalid input. Please enter a valid option (1 or 2).\n");
                 scan.nextLine(); // takes in the invalid input.
             }
         }
         
         //scan.close();
         System.out.println("Thank you for playing the game!");
+    }
+    
+    public static void welcome() {
+        System.out.println("===========================");
+        System.out.println("| WELCOME TO ESCAPE FIVE! |");
+        System.out.println("===========================");
+    }
+    
+    public static void mainMenu() {
+        System.out.println("======== Main Menu ========");
+        System.out.println(" 1. New Game");
+        System.out.println(" 2. Load Saved Game");
+        System.out.println(" 3. Quit Game");
+        System.out.println("===========================");
     }
 }
