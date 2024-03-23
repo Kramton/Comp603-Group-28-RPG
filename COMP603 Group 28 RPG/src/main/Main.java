@@ -21,7 +21,9 @@ public class Main { // menu screen
 
         boolean isValid = true;
         while (isValid) {
+            
             mainMenu();
+            
             try {
                 System.out.print("> ");
                 int choice = scan.nextInt();
