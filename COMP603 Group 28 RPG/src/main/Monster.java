@@ -9,46 +9,45 @@ package main;
  * @author cqm0237
  */
 public abstract class Monster {
-  private String name;
-  private int health;
-  private int attack;
 
-  public Monster(String name, int health, int attack)   {
-    this.name = name;
-    this.health = health;
-    this.attack = attack;
-  }
+    private String name;
+    private int health;
+    private int attack;
 
-  public boolean isDead()
-  {
-    if (getHealth() <= 0)
-    {
-      return true;
+    public Monster(String name, int health, int attack) {
+        this.name = name;
+        this.health = health;
+        this.attack = attack;
     }
-    return false;
-  }
 
-  public String getName() {
-    return this.name;
-  }
+    public boolean isDead() {
+        if (getHealth() <= 0) {
+            return true;
+        }
+        return false;
+    }
 
-  public int getHealth() {
-    return this.health;
-  }
+    public String getName() {
+        return this.name;
+    }
 
-  public int getAttack() {
-    return this.attack;
-  }
+    public int getHealth() {
+        return this.health;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public int getAttack() {
+        return this.attack;
+    }
 
-  public void setHealth(int value) {
-    this.health += value;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void setAttack(int value) {
-    this.attack += value;
-  }
+    public void setHealth(int value) {
+        this.health += value;
+    }
+
+    public void setAttack(int value) {
+        this.attack += value;
+    }
 }

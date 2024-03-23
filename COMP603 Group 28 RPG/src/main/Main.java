@@ -51,7 +51,7 @@ public class Main { // menu screen
             } 
             catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid option (1 or 2).");
-                scan.nextLine();
+                scan.nextLine(); // takes in the invalid input.
             }
         }
         

@@ -9,5 +9,5 @@ package main;
  * @author cqm0237
  */
 public class Combat {
-    
+
 }
