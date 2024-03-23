@@ -8,7 +8,7 @@ package main;
  *
  * @author cqm0237
  */
-public class Monster {
+public abstract class Monster {
   private String name;
   private int health;
   private int attack;
