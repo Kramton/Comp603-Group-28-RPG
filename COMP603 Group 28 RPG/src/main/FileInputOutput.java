@@ -18,7 +18,7 @@ public class FileInputOutput {
     public FileInputOutput() {
         try {
             this.br = new BufferedReader(new FileReader("./savedData/save.txt"));
-            this.pw = new PrintWriter(new FileOutputStream("./savedData/save.txt"));
+            this.pw = new PrintWriter(new FileOutputStream("./savedData/save.txt", true));
         } 
         catch (FileNotFoundException e) {
             System.out.println("File not found");
