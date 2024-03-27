@@ -1,6 +1,15 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package main;
 import java.io.*;
 
-class Player {
+/**
+ *
+ * @author cqm0237
+ */
+public class Player {
   private int health;
   private int attack;
   private int defense;
@@ -60,18 +69,33 @@ class Player {
   public Item[] getItems(){
     return this.items;
   }
+  
+  public void setAttack(int value)
+  {
+    this.attack = value;
+  }
+  
+   public void setDefense(int value)
+  {
+    this.defense = value;
+  }
+   
+    public void setHealth(int value)
+  {
+    this.health = value;
+  }
 
-  public void setHealth(int value)
+  public void changeHealth(int value)
   {
     this.health += value;
   }
 
-  public void setAttack(int value)
+  public void changeAttack(int value)
   {
     this.attack += value;
   }
 
-  public void setDefense(int value)
+  public void changeDefense(int value)
   {
     //if defense increases (i.e uses shield) or the attack of the monster is less than or equal to the defese. then just modify defense.
     if (this.defense + value >= 0)
@@ -80,7 +104,7 @@ class Player {
     }
     //if the attack of the monster is greater than current defense, subtract health by the remainder, and make defense 0
     else {
-      setHealth(this.defense + value);
+      changeHealth(this.defense + value);
       this.defense = 0;
     }
     
@@ -89,24 +113,5 @@ class Player {
   public void setItems(int index, Item item)
   {
     this.items[index] = item;
-  }
-
-  public void useItem(int itemIndex)
-  {
-    //if the item is a potion, add health by the stat of the potion
-    if (items[itemIndex].getName().equals("Potion"))
-    {
-      setHealth(items[itemIndex].getStat());
-    }
-    //if the item is a sword, add attack by the stat of the sword
-    else if (items[itemIndex].getName().equals("Sword"))
-    {
-      setAttack(items[itemIndex].getStat());
-    }
-    //if the item is a shield, add defense by the stat of the shield
-    else if (items[itemIndex].getName().equals("Shield"))
-    {
-      setDefense(items[itemIndex].getStat());
-    }
   }
 }
