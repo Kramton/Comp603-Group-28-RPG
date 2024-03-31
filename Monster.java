@@ -44,10 +44,10 @@ public abstract class Monster {
     }
 
     public void setHealth(int value) {
-        this.health += value;
+        this.health = value;
     }
 
     public void setAttack(int value) {
-        this.attack += value;
+        this.attack = value;
     }
 }
