@@ -18,15 +18,24 @@ public class FileInputOutput {
     public FileInputOutput() {
         try {
             this.br = new BufferedReader(new FileReader("./savedData/save.txt"));
-            this.pw = new PrintWriter(new FileOutputStream("./savedData/save.txt", true));
+            this.pw = null;
         } 
         catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
     }
 
+    //save game
     public void write(Game game) {
-        String str = "";
+        try {
+            //empties the file before writing
+            this.pw = new PrintWriter(new FileOutputStream("./savedData/save.txt"));
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+        
+        String str = "\n";
         Player player = game.getPlayer();
         int room = game.getRoom();
         Item[] items = player.getItems();
@@ -37,13 +46,15 @@ public class FileInputOutput {
 
         for (int i = 0; i < 5; i++) {
             if (items[i] != null) {
-                str += items[i].getName() + items[i].getStat() + "\n";
+                str += items[i].getName() +" " + items[i].getStat() + "\n";
             } 
             else {
                 str += "\n";
             }
         }
         str += room + "\n";
+        
+        System.out.println("Progress saved!");
 
         pw.println(str);
         pw.close();
@@ -65,6 +76,8 @@ public class FileInputOutput {
         return false;
     }
 
+    
+    //load game
     public Game read() {
         String line;
         
