@@ -11,20 +11,23 @@ import java.util.Scanner;
  *
  * @author cqm0237
  */
-public class Game{
+public class Game {
+
     private Player player;
     private int room;
+    private final int MAX_ROOM = 10;
 
-    public Game(){
+    public Game() {
         this.player = new Player();
         this.room = 1;
     }
 
-    public void start(Player player, int room){
+    public void start(Player player, int room) {
         FileInputOutput fio = new FileInputOutput();
 
         //main main game loop, represents 1 room
-        while (!(player.isDead()) && room <= 5){
+//        while (!(player.isDead()) && room <= 5) {
+        while (!(player.isDead()) && room <= MAX_ROOM) {
 
             OutputHandler oHandler = new OutputHandler();
             InputHandler iHandler = new InputHandler();
@@ -41,17 +44,18 @@ public class Game{
             Monster[] monsters = {goblin, ogre, boss};
             Monster monster;
 
-            if (room != 5){
-                monster = monsters[rand.nextInt(monsters.length-1)];
-            }
-            else{
-                monster = monsters[monsters.length-1];
+//            if (room != 5) {
+            if (room != MAX_ROOM) {
+                monster = monsters[rand.nextInt(monsters.length - 1)];
+            } 
+            else {
+                monster = monsters[monsters.length - 1];
             }
 
             oHandler.printMonsterStatus(monster);
-      
+
             //combat loop
-            while(!monster.isDead() && !player.isDead()){
+            while (!monster.isDead() && !player.isDead()) {
                 System.out.println("Player turn! ");
                 System.out.println(oHandler.printMenu());
 
@@ -59,11 +63,11 @@ public class Game{
 
                 int choice = scan.nextInt();
 
-                switch(choice){
+                switch (choice) {
 
                     case 1:
                         iHandler.pCombat(player, monster);
-                        if (!monster.isDead()){
+                        if (!monster.isDead()) {
                             System.out.println(monster.getName() + "'s turn! ");
                             iHandler.mCombat(player, monster);
                         }
@@ -82,11 +86,9 @@ public class Game{
 
                             if (scan.hasNextInt()) { // Check if the next token is an integer
                                 itemIndex = scan.nextInt();
-                                if (itemIndex > 0 && itemIndex <=5)
-                                {
+                                if (itemIndex > 0 && itemIndex <= 5) {
                                     isValid = true; // Set isValidInput to true to exit the loop
-                                }
-                                else{
+                                } else {
                                     System.out.println("Invalid input. Please enter 1-5");
                                 }
                             } 
@@ -107,77 +109,84 @@ public class Game{
                     case 7:
                         //quit
                         isValid = false;
-                        while(!isValid){
+                        while (!isValid) {
                             System.out.println("Would you like to save before you quit? 1. Yes 2. No");
-                            if(scan.hasNextInt()){
+                            if (scan.hasNextInt()) {
                                 choice = scan.nextInt();
-                                if (choice == 1){
+                                if (choice == 1) {
                                     isValid = true;
                                     fio.write(this);
-                                }
-                                else if(choice == 2){
+                                    System.out.println("Thank you for playing the game!");
+                                    System.exit(0);
+                                } 
+                                else if (choice == 2) {
                                     isValid = true;
                                     System.out.println("Thank you for playing the game!");
                                     System.exit(0);
-                                }
-                                else{
+                                } 
+                                else {
                                     System.out.println("Invalid input");
                                 }
-                            }
-                            else{
+                            } 
+                            else {
                                 System.out.println("Please enter a number");
                                 scan.next();
                             }
                         }
-                        
+
                         break;
                 }
             }
-        
-            if (monster.isDead()){
+
+            if (monster.isDead()) {
                 System.out.println("You have defeated " + monster.getName() + "!");
-            }
-            else if(player.isDead()){
+            } 
+            else if (player.isDead()) {
                 System.out.println("You have been defeated!");
             }
 
-            if (room!= 5 && !player.isDead()){
+//            if (room != 5 && !player.isDead()) {
+            if (room != this.MAX_ROOM && !player.isDead()) {
                 Item[] rewards = {new Sword(rand), new Shield(rand), new Potion(rand)};
                 Item reward = rewards[rand.nextInt(rewards.length)];
                 System.out.println("You have received a " + reward.getName());
-                for(int i = 0; i < player.getItems().length; i++){
-                    if (player.getItems()[i] == null){
+                for (int i = 0; i < player.getItems().length; i++) {
+                    if (player.getItems()[i] == null) {
                         player.setItems(i, reward);
                         i = player.getItems().length - 1;
                     }
                 }
                 System.out.println("Moving to the next room...");
             }
-            room++;
+            //room++;
+            setRoom(room++);
         }
     }
 
     //Room-loop, represents one combat
-    public void combat(Player player, Monster monster,InputHandler iHandler)
-    {
-      //while();
-      System.out.println("You are attacking " + monster.getName() + "!");
-      //iHandler.attack(player, monster);
+    public void combat(Player player, Monster monster, InputHandler iHandler) {
+        //while();
+        System.out.println("You are attacking " + monster.getName() + "!");
+        //iHandler.attack(player, monster);
     }
 
     public void setPlayer(Player player) {
-      this.player = player;
+        this.player = player;
     }
 
     public Player getPlayer() {
-      return this.player;
+        return this.player;
     }
 
     public void setRoom(int room) {
-      this.room = room;
+        this.room = room;
     }
 
     public int getRoom() {
-      return this.room;
+        return this.room;
+    }
+
+    public int maxRoom() {
+        return this.MAX_ROOM;
     }
 }

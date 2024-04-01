@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
+
 import java.io.*;
 
 /**
@@ -10,19 +11,20 @@ import java.io.*;
  * @author cqm0237
  */
 public class Player {
-  private int health;
-  private int attack;
-  private int defense;
-  private Item[] items;
 
-  public Player() {
-    this.health = 100;
-    this.attack = 10;
-    this.defense = 10;
-    this.items = new Item[5];
-  }
+    private int health;
+    private int attack;
+    private int defense;
+    private Item[] items;
 
-  /*
+    public Player() {
+        this.health = 100;
+        this.attack = 10;
+        this.defense = 10;
+        this.items = new Item[5];
+    }
+
+    /*
   public Player(FileReader attributes) {
     try {
       FileReader fr = new FileReader("./save.txt");
@@ -43,75 +45,63 @@ public class Player {
     System.out.println("Error reading from file " + "save.txt");
     }
     }
-    */
-
-  public boolean isDead()
-  {
-    if (getHealth() <= 0)
-    {
-      return true;
+     */
+    public boolean isDead() {
+        if (getHealth() <= 0) {
+            return true;
+        }
+        return false;
     }
-    return false;
-  }
 
-  public int getHealth() {
-    return this.health;
-  }
-
-  public int getAttack() {
-    return this.attack;
-  }
-
-  public int getDefense(){
-    return this.defense;
-  }
-
-  public Item[] getItems(){
-    return this.items;
-  }
-  
-  public void setAttack(int value)
-  {
-    this.attack = value;
-  }
-  
-   public void setDefense(int value)
-  {
-    this.defense = value;
-  }
-   
-    public void setHealth(int value)
-  {
-    this.health = value;
-  }
-
-  public void changeHealth(int value)
-  {
-    this.health += value;
-  }
-
-  public void changeAttack(int value)
-  {
-    this.attack += value;
-  }
-
-  public void changeDefense(int value)
-  {
-    //if defense increases (i.e uses shield) or the attack of the monster is less than or equal to the defese. then just modify defense.
-    if (this.defense + value >= 0)
-    {
-      this.defense += value;
+    public int getHealth() {
+        return this.health;
     }
-    //if the attack of the monster is greater than current defense, subtract health by the remainder, and make defense 0
-    else {
-      changeHealth(this.defense + value);
-      this.defense = 0;
-    }
-    
-  }
 
-  public void setItems(int index, Item item)
-  {
-    this.items[index] = item;
-  }
+    public int getAttack() {
+        return this.attack;
+    }
+
+    public int getDefense() {
+        return this.defense;
+    }
+
+    public Item[] getItems() {
+        return this.items;
+    }
+
+    public void setAttack(int value) {
+        this.attack = value;
+    }
+
+    public void setDefense(int value) {
+        this.defense = value;
+    }
+
+    public void setHealth(int value) {
+        this.health = value;
+    }
+
+    public void changeHealth(int value) {
+        this.health += value;
+    }
+
+    public void changeAttack(int value) {
+        this.attack += value;
+    }
+
+    public void changeDefense(int value) {
+        //if defense increases (i.e uses shield) or the attack of the monster is less than or equal to the defese. then just modify defense.
+        if (this.defense + value >= 0) {
+            this.defense += value;
+        } //if the attack of the monster is greater than current defense, subtract health by the remainder, and make defense 0
+        else {
+            changeHealth(this.defense + value);
+            this.defense = 0;
+        }
+
+    }
+
+    public void setItems(int index, Item item) {
+        this.items[index] = item;
+    }
 }

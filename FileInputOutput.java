@@ -34,10 +34,11 @@ public class FileInputOutput {
         catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-        
+
         String str = "\n";
         Player player = game.getPlayer();
         int room = game.getRoom();
+        game.setRoom(room); // added this line to see if it would set the current room, but no..
         Item[] items = player.getItems();
 
         str += player.getHealth() + "\n";
@@ -46,14 +47,14 @@ public class FileInputOutput {
 
         for (int i = 0; i < 5; i++) {
             if (items[i] != null) {
-                str += items[i].getName() +" " + items[i].getStat() + "\n";
+                str += items[i].getName() + " " + items[i].getStat() + "\n";
             } 
             else {
                 str += "\n";
             }
         }
         str += room + "\n";
-        
+
         System.out.println("Progress saved!");
 
         pw.println(str);
@@ -72,22 +73,21 @@ public class FileInputOutput {
         catch (IOException e) {
             System.out.println("IO Exception");
         }
-        
+
         return false;
     }
 
-    
     //load game
     public Game read() {
         String line;
-        
+
         Game game = new Game(); // game.player is empty
         Player player = game.getPlayer(); // it's gonna be pass by reference
         int room = game.getRoom(); // passed by value, need to save to "game"'s room
 
         try {
-            for (int i = 1; i < 10; i++) {
-                if ((line = br.readLine()) != null){
+            for (int i = 1; i < 11; i++) {
+                if ((line = br.readLine()) != null) {
 
                     switch (i) {
                         case 1:
@@ -107,9 +107,9 @@ public class FileInputOutput {
                             // break the line
                             // save item
 
-                                // loops through, creates an item, split the string and 
-                                //saves name and stat into Item,
-                                // then save item to item array
+                            // loops through, creates an item, split the string and 
+                            //saves name and stat into Item,
+                            // then save item to item array
                             if (!line.equals("")) {
                                 Item item = null;
                                 String[] str = line.split(" ");
@@ -136,7 +136,7 @@ public class FileInputOutput {
                                 }
                                 break;
                             }
-                            
+
                             break;
                         case 9:
                             room = Integer.parseInt(line);

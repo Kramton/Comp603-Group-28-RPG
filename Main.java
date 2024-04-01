@@ -21,9 +21,9 @@ public class Main { // menu screen
 
         boolean isValid = true;
         while (isValid) {
-            
+
             print.mainMenu();
-            
+
             try {
                 System.out.print("> ");
                 int choice = scan.nextInt();
@@ -43,16 +43,16 @@ public class Main { // menu screen
                         Game game = new Game();
                         game.start(game.getPlayer(), game.getRoom());
                     }
-                }
+                } 
                 else if (choice == 3) {
                     System.out.println("Thanks for playing!");
                     System.out.println("Quitting... ");
                     System.exit(0); // Stops the program.
-                }
+                } 
                 else {
                     throw new InputMismatchException();
                 }
-                
+
                 isValid = false;
             } 
             catch (InputMismatchException e) {
@@ -60,7 +60,7 @@ public class Main { // menu screen
                 scan.nextLine(); // takes in the invalid input.
             }
         }
-        
+
         //scan.close();
         System.out.println("Thank you for playing the game!");
     }

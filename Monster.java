@@ -19,6 +19,10 @@ public abstract class Monster {
         this.health = health;
         this.attack = attack;
     }
+    
+    public Monster() {
+        
+    }
 
     public boolean isDead() {
         if (getHealth() <= 0) {
