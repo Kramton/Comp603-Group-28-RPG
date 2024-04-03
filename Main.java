@@ -30,18 +30,18 @@ public class Main { // menu screen
 
                 if (choice == 1) {
                     Game game = new Game();
-                    game.start(game.getPlayer(), game.getRoom());
+                    game.start();
                 } 
                 else if (choice == 2) {
                     FileInputOutput fio = new FileInputOutput();
                     if (!(fio.fileEmpty())) {
                         Game game = fio.read();
-                        game.start(game.getPlayer(), game.getRoom());
+                        game.start();
                     } 
                     else {
                         System.out.println("No saved data. Starting a new game...");
                         Game game = new Game();
-                        game.start(game.getPlayer(), game.getRoom());
+                        game.start();
                     }
                 } 
                 else if (choice == 3) {

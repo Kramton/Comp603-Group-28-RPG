@@ -74,12 +74,12 @@ public class OutputHandler {
 
     void printHelp() {
         Game game = new Game();
-        Monster monster = new Boss();
+        Boss monster = new Boss();
 
         System.out.println("=============================== HELP ==============================");
         System.out.println(" + Defeat the monster in each room to advance to the next level!");
         System.out.println(" + After clearing the room, you will receive a random item.");
-        System.out.println(" + Defeat the " + monster.getName() + " at room " + game.maxRoom() + " to beat the game!");
+        System.out.println(" + Defeat the Boss at room " + game.maxRoom() + " to beat the game!");
         System.out.println(" + Use swords to increase your damage!");
         System.out.println(" + Use shields to increase your defense!");
         System.out.println(" + Use potions to heal yourself!");

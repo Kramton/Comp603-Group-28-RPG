@@ -16,6 +16,6 @@ public class Goblin extends Monster {
     // attack 15-25
 
     public Goblin(Random rand) {
-        super("Goblin", rand.nextInt(20) + 60, rand.nextInt(10) + 5);
+        super("Goblin", rand.nextInt(20) + 40, rand.nextInt(10) + 15);
     }
 }

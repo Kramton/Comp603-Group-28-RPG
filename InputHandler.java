@@ -4,6 +4,8 @@
  */
 package main;
 
+import java.util.Random;
+
 /**
  *
  * @author cqm0237
@@ -17,9 +19,22 @@ public class InputHandler {
      */
     public void pCombat(Player player, Monster monster) {
 
+        Random rand = new Random();
         System.out.println("You are attacking " + monster.getName() + "!");
-        System.out.println(monster.getName() + " takes " + player.getAttack() + " damage");
-        monster.setHealth(monster.getHealth() - player.getAttack());
+        
+        double luckyStrike = rand.nextDouble(1);
+        int multiplier = rand.nextInt(2) + 2;
+        
+        if(luckyStrike >=0.7){
+            System.out.println("You attack crits, gaining " + multiplier + " times the power!");
+           System.out.println(monster.getName() + " takes " + player.getAttack()*multiplier + " damage");
+            monster.setHealth(monster.getHealth() - player.getAttack()*multiplier); 
+        }
+        else{
+            System.out.println(monster.getName() + " takes " + player.getAttack() + " damage");
+            monster.setHealth(monster.getHealth() - player.getAttack());
+        }
+        
         
         if (monster.getHealth() > 0) {
             System.out.println(monster.getName() + " has " + monster.getHealth() + " HP left");
@@ -32,7 +47,6 @@ public class InputHandler {
 
     public void mCombat(Player player, Monster monster) {
         System.out.println(monster.getName() + " attacks!");
-        System.out.println("You take " + monster.getAttack() + " damage");
         player.changeDefense(monster.getAttack() * -1);//change defense by negative
 
         if (player.getHealth() > 0) {
@@ -52,20 +66,21 @@ public class InputHandler {
         else if (player.getItems()[itemIndex].getName().equals("Potion")) {
             player.changeHealth(player.getItems()[itemIndex].getStat());
             System.out.println("Your health has increased by " + player.getItems()[itemIndex].getStat());
+            player.setItems(itemIndex, null);
         } //if the item is a sword, add attack by the stat of the sword
         else if (player.getItems()[itemIndex].getName().equals("Sword")) {
             player.changeAttack(player.getItems()[itemIndex].getStat());
             System.out.println("Your attack has increased by " + player.getItems()[itemIndex].getStat());
+            player.setItems(itemIndex, null);
         } //if the item is a shield, add defense by the stat of the shield
         else if (player.getItems()[itemIndex].getName().equals("Shield")) {
             player.changeDefense(player.getItems()[itemIndex].getStat());
             System.out.println("Your defense has increased by " + player.getItems()[itemIndex].getStat());
+            player.setItems(itemIndex, null);
         }
     }
-
     public void help() {
         OutputHandler oHandler = new OutputHandler();
         oHandler.printHelp();
     }
-
 }

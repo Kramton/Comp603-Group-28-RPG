@@ -20,7 +20,7 @@ public class Player {
     public Player() {
         this.health = 100;
         this.attack = 10;
-        this.defense = 10;
+        this.defense = 5;
         this.items = new Item[5];
     }
 
@@ -90,15 +90,21 @@ public class Player {
     }
 
     public void changeDefense(int value) {
+        
         //if defense increases (i.e uses shield) or the attack of the monster is less than or equal to the defese. then just modify defense.
-        if (this.defense + value >= 0) {
+        if (value > 0) {
             this.defense += value;
-        } //if the attack of the monster is greater than current defense, subtract health by the remainder, and make defense 0
+        } //if the attack of the monster is greater than current defense, subtract health by the remainder
         else {
-            changeHealth(this.defense + value);
-            this.defense = 0;
+            if (this.defense < (-value)){
+                changeHealth(this.defense + value);
+                int difference = this.defense + value;
+                System.out.println("You take " + (-difference) + " damage");
+            }
+            else if(this.defense >= (-value)){
+                System.out.println("Your defense is too high. You don't take damage!");
+            }
         }
-
     }
 
     public void setItems(int index, Item item) {

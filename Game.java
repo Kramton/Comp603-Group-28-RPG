@@ -15,26 +15,26 @@ public class Game {
 
     private Player player;
     private int room;
-    private final int MAX_ROOM = 10;
+    private final int MAX_ROOM = 5;
 
     public Game() {
         this.player = new Player();
         this.room = 1;
     }
 
-    public void start(Player player, int room) {
+    public void start() {
         FileInputOutput fio = new FileInputOutput();
 
-        //main main game loop, represents 1 room
-//        while (!(player.isDead()) && room <= 5) {
-        while (!(player.isDead()) && room <= MAX_ROOM) {
+        //main main game loop, represents 1 this.room
+//        while (!(player.isDead()) && this.room <= 5) {
+        while (!(player.isDead()) && this.room <= MAX_ROOM) {
 
             OutputHandler oHandler = new OutputHandler();
             InputHandler iHandler = new InputHandler();
             Random rand = new Random();
             Scanner scan = new Scanner(System.in);
 
-            System.out.println("You are in room " + room);
+            System.out.println("You are in room " + this.room);
 
             //spawn monster
             //Put all the monsters in the array, pick a random one to spawn
@@ -44,8 +44,8 @@ public class Game {
             Monster[] monsters = {goblin, ogre, boss};
             Monster monster;
 
-//            if (room != 5) {
-            if (room != MAX_ROOM) {
+//            if (this.room != 5) {
+            if (this.room != MAX_ROOM) {
                 monster = monsters[rand.nextInt(monsters.length - 1)];
             } 
             else {
@@ -145,8 +145,8 @@ public class Game {
                 System.out.println("You have been defeated!");
             }
 
-//            if (room != 5 && !player.isDead()) {
-            if (room != this.MAX_ROOM && !player.isDead()) {
+//            if (this.room != 5 && !player.isDead()) {
+            if (this.room != this.MAX_ROOM && !player.isDead()) {
                 Item[] rewards = {new Sword(rand), new Shield(rand), new Potion(rand)};
                 Item reward = rewards[rand.nextInt(rewards.length)];
                 System.out.println("You have received a " + reward.getName());
@@ -158,16 +158,9 @@ public class Game {
                 }
                 System.out.println("Moving to the next room...");
             }
-            //room++;
-            setRoom(room++);
+            this.room++;
+            //setRoom(this.room++);
         }
-    }
-
-    //Room-loop, represents one combat
-    public void combat(Player player, Monster monster, InputHandler iHandler) {
-        //while();
-        System.out.println("You are attacking " + monster.getName() + "!");
-        //iHandler.attack(player, monster);
     }
 
     public void setPlayer(Player player) {

@@ -16,6 +16,6 @@ public class Ogre extends Monster {
     // attack 5-15
 
     public Ogre(Random rand) {
-        super("Ogre", rand.nextInt(20) + 60, rand.nextInt(10) + 5);
+        super("Ogre", rand.nextInt(20) + 60, rand.nextInt(10) + 10);
     }
 }
