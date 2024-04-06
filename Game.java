@@ -4,6 +4,7 @@
  */
 package main;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -61,80 +62,88 @@ public class Game {
 
                 System.out.print("> ");
 
-                int choice = scan.nextInt();
+                try {
+                    int choice = scan.nextInt();
+                    switch (choice) {
 
-                switch (choice) {
-
-                    case 1:
-                        iHandler.pCombat(player, monster);
-                        if (!monster.isDead()) {
-                            System.out.println(monster.getName() + "'s turn! ");
-                            iHandler.mCombat(player, monster);
-                        }
-                        break;
-                    case 2:
-                        oHandler.printPlayerStatus(player);
-                        break;
-                    case 3:
-                        oHandler.printPlayerItems(player);
-                        break;
-                    case 4:
-                        boolean isValid = false;
-                        int itemIndex = 0;
-                        while (!isValid) {
-                            System.out.println("Which item number do you want to use (1-5)");
-
-                            if (scan.hasNextInt()) { // Check if the next token is an integer
-                                itemIndex = scan.nextInt();
-                                if (itemIndex > 0 && itemIndex <= 5) {
-                                    isValid = true; // Set isValidInput to true to exit the loop
-                                } else {
-                                    System.out.println("Invalid input. Please enter 1-5");
-                                }
-                            } 
-                            else {
-                                System.out.println("Invalid input. Please enter again");
-                                scan.next(); // Clear the scanner buffer
+                        case 1:
+                            iHandler.pCombat(player, monster);
+                            if (!monster.isDead()) {
+                                System.out.println(monster.getName() + "'s turn! ");
+                                iHandler.mCombat(player, monster);
                             }
-                        }
-                        iHandler.useItem(player, itemIndex);
-                        break;
-                    case 5:
-                        oHandler.printHelp();
-                        break;
-                    case 6:
-                        //save game
-                        fio.write(this);
-                        break;
-                    case 7:
-                        //quit
-                        isValid = false;
-                        while (!isValid) {
-                            System.out.println("Would you like to save before you quit? 1. Yes 2. No");
-                            if (scan.hasNextInt()) {
-                                choice = scan.nextInt();
-                                if (choice == 1) {
-                                    isValid = true;
-                                    fio.write(this);
-                                    System.out.println("Thank you for playing the game!");
-                                    System.exit(0);
-                                } 
-                                else if (choice == 2) {
-                                    isValid = true;
-                                    System.out.println("Thank you for playing the game!");
-                                    System.exit(0);
+                            break;
+                        case 2:
+                            oHandler.printPlayerStatus(player);
+                            break;
+                        case 3:
+                            oHandler.printPlayerItems(player);
+                            break;
+                        case 4:
+                            boolean isValid = false;
+                            int itemIndex = 0;
+                            while (!isValid) {
+                                System.out.println("Which item number do you want to use (1-5)");
+
+                                if (scan.hasNextInt()) { // Check if the next token is an integer
+                                    itemIndex = scan.nextInt();
+                                    if (itemIndex > 0 && itemIndex <= 5) {
+                                        isValid = true; // Set isValidInput to true to exit the loop
+                                    } else {
+                                        System.out.println("Invalid input. Please enter 1-5");
+                                    }
+                                } else {
+                                    System.out.println("Invalid input. Please enter again");
+                                    scan.next(); // Clear the scanner buffer
+                                }
+                            }
+                            iHandler.useItem(player, itemIndex);
+                            break;
+                        case 5:
+                            oHandler.printHelp();
+                            break;
+                        case 6:
+                            //save game
+                            fio.write(this);
+                            break;
+                        case 7:
+                            //quit
+                            isValid = false;
+                            while (!isValid) {
+                                System.out.println("Would you like to save before you quit? 1. Yes 2. No");
+                                if (scan.hasNextInt()) {
+                                    choice = scan.nextInt();
+                                    if (choice == 1) {
+                                        isValid = true;
+                                        fio.write(this);
+                                        System.out.println("Thank you for playing the game!");
+                                        System.exit(0);
+                                    } 
+                                    else if (choice == 2) {
+                                        isValid = true;
+                                        System.out.println("Thank you for playing the game!");
+                                        System.exit(0);
+                                    } 
+                                    else {
+                                        System.out.println("Invalid input");
+                                    }
                                 } 
                                 else {
-                                    System.out.println("Invalid input");
+                                    System.out.println("Please enter a number");
+                                    scan.next();
                                 }
-                            } 
-                            else {
-                                System.out.println("Please enter a number");
-                                scan.next();
                             }
-                        }
 
-                        break;
+                            break;
+                        default:
+                            System.out.println("Please enter numbers (1-7)");
+                            break;
+                    }
+
+                } 
+                catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid option (1-7).\n");
+                    scan.nextLine(); // takes in the invalid input.
                 }
             }
 

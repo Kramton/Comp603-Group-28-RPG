@@ -74,7 +74,6 @@ public class OutputHandler {
 
     void printHelp() {
         Game game = new Game();
-        Boss monster = new Boss();
 
         System.out.println("=============================== HELP ==============================");
         System.out.println(" + Defeat the monster in each room to advance to the next level!");
